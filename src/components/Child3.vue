@@ -16,10 +16,12 @@ export default {
     props: {
       coo: String // foo作为props属性绑定
     },
+    inject:['name'],
     components:{
         
     },
     created() {
+        this.$log(this.name);
         window.console.log('child2',this.$attrs)
     }
 }

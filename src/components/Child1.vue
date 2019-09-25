@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    
+        <button @click="changeProvide">修改 provide</button>
         <!-- store示例 -->
         <hr/>
         <h2>store示例: </h2>
@@ -52,13 +52,16 @@ export default {
   components:{
     Child2Vue,ChildFunctionVue
   },
+  provide: {
+    name: 'provide传的值'
+  },
   inheritAttrs: false, // 可以关闭自动挂载到组件根元素上的没有在props声明的属性
   data() {
     return {
       list:[
         {
           id:1,
-          name:"占位符占位符"
+          name:"占位符"
         }
       ]
     }
@@ -86,7 +89,10 @@ export default {
    },
    doSomething() {
      window.console.log("子组件mounted完成");
-   }
+   },
+   changeProvide() {
+     
+   },
   }
 }
 </script>
