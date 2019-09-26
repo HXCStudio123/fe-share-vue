@@ -2,39 +2,33 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
         <button @click="changeProvide">修改 provide</button>
+
         <!-- store示例 -->
-        <hr/>
-        <h2>store示例: </h2>
-        <p>count:{{count}}</p>
-        <button @click="setCount(count+1)">+1</button>
-        <button @click="setCount(count-1)">-1</button>
+        <demo-vue name="Child1" title="store示例">
+          <p>count:{{count}}</p>
+          <button @click="setCount(count+1)">+1</button>
+          <button @click="setCount(count-1)">-1</button>
+        </demo-vue>
+
         <!-- 多级传参示例 -->
-        <hr/>
-        <h2>多级传参示例:</h2>
-          <div class="hello">
-            <div style="margin:10px;text-align:left">Child1内部</div>
-            <div class="demo">     
+        <demo-vue name="Child1" title="多级传参示例">
                 <div>父组件传递的 $attrs:{{$attrs}}</div>
                 <div> 当前页面接收的 $props:{{$props}}</div>
                 <div>foo:{{foo}}</div>
-                <child2-vue v-bind="$attrs" v-on="$listeners" @other-get="otherGet" @hook:mounted="doSomething"></child2-vue>
-            </div>
-          </div>
+                <child2-vue v-bind="$attrs" v-on="$listeners" @other-get="otherGet" @hook:mounted="$log('成功挂载');"></child2-vue>
+        </demo-vue>
+
         <!-- 函数式组件 -->
-        <hr/>
-        <h2>函数式组件:</h2>
-          <div class="hello">
-            <div style="margin:10px;text-align:left">Child1内部</div>
-            <div class="demo">     
-              <child-function-vue v-bind="$attrs" ></child-function-vue>
-            </div>
-          </div>
+        <demo-vue name="Child1" title="函数式组件">
+          <child-function-vue v-bind="$attrs" ></child-function-vue>
+        </demo-vue>
+
         <!--  长列表示例 -->
-        <hr/>
-        <h2>长列表示例</h2>
-        <span v-for="(item, idx) in list" :key="idx">
+        <demo-vue name="Child1" title="长列表示例">
+          <span v-for="(item, idx) in list" :key="idx">
                 {{item.content}}
-        </span>
+          </span>
+        </demo-vue>
   </div>
 </template>
 
@@ -42,6 +36,7 @@
 import  { store, mutations }  from '../utils/miniStore';
 import Child2Vue from './Child2.vue';
 import ChildFunctionVue from './ChildFunction.vue';
+import DemoVue from './Demo.vue';
 
 export default {
   name: 'HelloWorld',
@@ -50,7 +45,7 @@ export default {
     foo: String // foo作为props属性绑定
   },
   components:{
-    Child2Vue,ChildFunctionVue
+    Child2Vue,ChildFunctionVue,DemoVue
   },
   provide: {
     name: 'provide传的值'
@@ -74,7 +69,7 @@ export default {
       // this.list = Object.freeze(list);
       window.console.log("初始化");
       
-      window.console.log('child1:',this.$attrs,this.$listeners); // { "boo": "Html", "coo": "CSS", "doo": "Vue", "title": "前端工匠" }
+      window.console.log('child1:',this.$attrs,this.$listeners); 
       this.$listeners.get('111');
   },
    computed: {
@@ -91,7 +86,7 @@ export default {
      window.console.log("子组件mounted完成");
    },
    changeProvide() {
-     
+
    },
   }
 }
@@ -111,21 +106,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
-}
-.hello{
-  border:1px solid black;
-  margin: 20px;
-}
-.demo{
-  color:orange;text-align:left;
-  border:1px solid orange;
-  margin: 20px;
-}
-.deep-class{
-  border: #42b983;
-}
-.deep-class /deep/ .test-deep{
   color: #42b983;
 }
 </style>

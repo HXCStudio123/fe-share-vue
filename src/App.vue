@@ -31,8 +31,8 @@ export default {
       foo: "hello",
       boo: "world",
       coo: "fight",
-      doo: "hard"
-    }
+      doo: "hard",
+    };
   },
   components: {
     HelloWorld
@@ -44,18 +44,18 @@ export default {
     // store示例
     count() {
       return store.count;
-    }
+    },
   },
   methods: {
     // store示例
    setCount: mutations.setCount,
-   testListenNative(){
-     window.console.log('主页接收')
+   testListenNative() {
+     window.console.log('主页接收');
    },
-   testListen(){
-     window.console.log('主页接收,没有native')
+   testListen() {
+     window.console.log('主页接收,没有native');
    },
-   getNum(num){
+   getNum(num) {
      window.console.log('获取值'+num);
    },
   }

@@ -1,15 +1,13 @@
 <template>
-  <div class="hello">
-        <div style="margin:10px">Child3内部</div>
-            <div class="demo">        
-                <div>父组件传递的 $attrs:{{$attrs}}</div>
-                <div>coo:{{coo}}</div>
-                <div>当前页面接收的 $props:{{$props}}</div>
-         </div>
-  </div>
+    <demo-vue name="Child3" color="blueviolet">
+        <div>父组件传递的 $attrs:{{$attrs}}</div>
+        <div>coo:{{coo}}</div>
+        <div>当前页面接收的 $props:{{$props}}</div>
+    </demo-vue>
 </template>
 
 <script>
+import DemoVue from './Demo.vue';
 
 export default {
     name:'child2',
@@ -18,7 +16,7 @@ export default {
     },
     inject:['name'],
     components:{
-        
+        DemoVue
     },
     created() {
         this.$log(this.name);
@@ -28,14 +26,4 @@ export default {
 </script>
 
 <style scoped>
-    .demo{
-        color:blueviolet;
-        text-align:left;
-        border:1px solid blueviolet;
-        margin: 20px;
-    }
-    .hello{
-  border:1px solid black;
-  margin: 20px;
-}
 </style>
