@@ -12,10 +12,10 @@
 
         <!-- 多级传参示例 -->
         <demo-vue name="Child1" title="多级传参示例">
-                <div>父组件传递的 $attrs:{{$attrs}}</div>
-                <div> 当前页面接收的 $props:{{$props}}</div>
-                <div>foo:{{foo}}</div>
-                <child2-vue v-bind="$attrs" v-on="$listeners" @other-get="otherGet" @hook:mounted="$log('成功挂载');"></child2-vue>
+          <div>父组件传递的 $attrs:{{$attrs}}</div>
+          <div> 当前页面接收的 $props:{{$props}}</div>
+          <div>foo:{{foo}}</div>
+          <child2-vue v-bind="$attrs" v-on="$listeners" @other-get="otherGet" @hook:mounted="$log('成功挂载');"></child2-vue>
         </demo-vue>
 
         <!-- 函数式组件 -->
@@ -26,7 +26,7 @@
         <!--  长列表示例 -->
         <demo-vue name="Child1" title="长列表示例">
           <span v-for="(item, idx) in list" :key="idx">
-                {{item.content}}
+            {{item.content}}
           </span>
         </demo-vue>
   </div>

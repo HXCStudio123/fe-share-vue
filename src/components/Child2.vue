@@ -24,6 +24,8 @@ export default {
     },
     created() {
         this.$log('child2:Created',this.$props,this.$attrs,this.$listeners);
+        this.$listeners.listener();
+        this.$listeners['listener']();
     },
     mounted() {
         this.$log('child2:mounted',this.$props,this.$attrs,this.$listeners);

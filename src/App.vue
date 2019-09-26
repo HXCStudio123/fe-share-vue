@@ -9,20 +9,20 @@
 
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- 多级数据传递 -->
-    <HelloWorld
+    <child1
           msg="child1" 
           :foo="foo"
           :boo="boo"
           :doo="doo"
           :coo="coo"
-          @test-listen.native='testListenNative'
-          @test-listen='testListen'
-          @get='getNum'/>
+          @listener.native='listenerNative'
+          @listener='listener'
+          @get='get'/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/Child1.vue';
+import child1 from './components/Child1.vue';
 import  { store, mutations }  from './utils/miniStore';
 export default {
   name: 'app',
@@ -35,10 +35,10 @@ export default {
     };
   },
   components: {
-    HelloWorld
+    child1
   },
   created() {
-    
+    this.$log('App 的props',this.$props)
   },
   computed: {
     // store示例
@@ -49,13 +49,13 @@ export default {
   methods: {
     // store示例
    setCount: mutations.setCount,
-   testListenNative() {
+   listenerNative() {
      window.console.log('主页接收');
    },
-   testListen() {
+   listener() {
      window.console.log('主页接收,没有native');
    },
-   getNum(num) {
+   get(num) {
      window.console.log('获取值'+num);
    },
   }
