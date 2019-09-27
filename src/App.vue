@@ -7,7 +7,12 @@
     <button @click="setCount(count-1)">-1</button>
     <button @click="coo = '修改后的coo'">修改测试</button>
     <button @click=" () => $refs.child1.doSomething() ">调用子组件方法</button>
+    
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <div @click="alert('外部')">
+       外部
+        <div @click="alert('内部')">内部</div>
+    </div>
     <!-- 多级数据传递 -->
     <child1
           ref="child1"
@@ -40,7 +45,7 @@ export default {
     child1
   },
   created() {
-    this.$log('App 的props',this.$props)
+    this.$log('App 的props',this.$props);
   },
   computed: {
     // store示例
@@ -52,14 +57,17 @@ export default {
     // store示例
    setCount: mutations.setCount,
    listenerNative() {
-     window.console.log('主页接收');
+     this.$log('主页接收');
    },
    listener() {
-     window.console.log('主页接收,没有native');
-   },
+     this.$log('主页接收,没有native');
+        },
    get(num) {
-     window.console.log('获取值'+num);
+     this.$log('获取值'+num);
    },
+   alert(str) {
+     this.$alert(str);
+   }
   }
 }
 </script>

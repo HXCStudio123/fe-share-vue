@@ -1,34 +1,34 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-        <button @click="changeProvide">修改 provide</button>
+    <h1>{{ msg | filterName}}</h1>
+    <button @click="changeProvide">修改 provide</button>
 
-        <!-- store示例 -->
-        <demo-vue name="Child1" title="store示例">
-          <p>count:{{count}}</p>
-          <button @click="setCount(count+1)">+1</button>
-          <button @click="setCount(count-1)">-1</button>
-        </demo-vue>
+    <!-- store示例 -->
+    <demo-vue name="Child1" title="store示例">
+      <p>count:{{count}}</p>
+      <button @click="setCount(count+1)">+1</button>
+      <button @click="setCount(count-1)">-1</button>
+    </demo-vue>
 
-        <!-- 多级传参示例 -->
-        <demo-vue name="Child1" title="多级传参示例">
-          <div>父组件传递的 $attrs:{{$attrs}}</div>
-          <div> 当前页面接收的 $props:{{$props}}</div>
-          <div>foo:{{foo}}</div>
-          <child2-vue v-bind="$attrs" v-on="$listeners" @other-get="otherGet" @hook:mounted="$log('成功挂载');"></child2-vue>
-        </demo-vue>
+    <!-- 多级传参示例 -->
+    <demo-vue name="Child1" title="多级传参示例">
+      <div>父组件传递的 $attrs:{{$attrs}}</div>
+      <div> 当前页面接收的 $props:{{$props}}</div>
+      <div>foo:{{foo}}</div>
+      <child2-vue v-bind="$attrs" v-on="$listeners" @other-get="otherGet" @hook:mounted="$log('成功挂载');"></child2-vue>
+    </demo-vue>
 
-        <!-- 函数式组件 -->
-        <demo-vue name="Child1" title="函数式组件">
-          <child-function-vue v-bind="$attrs" ></child-function-vue>
-        </demo-vue>
+    <!-- 函数式组件 -->
+    <demo-vue name="Child1" title="函数式组件">
+      <child-function-vue v-bind="$attrs" ></child-function-vue>
+    </demo-vue>
 
-        <!--  长列表示例 -->
-        <demo-vue name="Child1" title="长列表示例">
-          <span v-for="(item, idx) in list" :key="idx">
-            {{item.content}}
-          </span>
-        </demo-vue>
+    <!--  长列表示例 -->
+    <demo-vue name="Child1" title="长列表示例">
+      <span v-for="(item, idx) in list" :key="idx">
+        {{item.content}}
+      </span>
+    </demo-vue>
   </div>
 </template>
 
@@ -67,9 +67,9 @@ export default {
       // 开启性能模式以后  可以看到有freeze后时间缩短近30%
       this.list = list;
       // this.list = Object.freeze(list);
-      window.console.log("初始化");
+      this.$log("初始化");
       
-      window.console.log('child1:',this.$attrs,this.$listeners); 
+      this.$log('child1:',this.$attrs,this.$listeners); 
       this.$listeners.get('111');
   },
    computed: {
@@ -79,16 +79,18 @@ export default {
   },
   methods: {
    setCount: mutations.setCount,
-   otherGet(){
-
-   },
+   otherGet(){ },
    doSomething() {
-     window.console.log("父组件调用");
+     this.$log("父组件调用");
    },
-   changeProvide() {
-
-   },
-  }
+   changeProvide() { },
+  },
+  filters: {
+        filterName: (value) => {
+            window.alert(value);
+            return '本地过滤器';
+        },
+  },
 }
 </script>
 
