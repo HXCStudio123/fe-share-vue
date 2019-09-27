@@ -1,9 +1,9 @@
 <template>
-    <demo-vue name="Child2" color="#42b983">
+    <demo-vue name='Child2' color='#42b983'>
         <div>父组件传递的 $attrs:{{$attrs}}</div>
         <div> 当前页面接收的 $props:{{$props}}</div>
         <div>boo:{{boo}}</div>
-        <child3-vue v-bind="$attrs" class="deep-class"></child3-vue>
+        <child3-vue v-bind='$attrs' class='deep-class'></child3-vue>
     </demo-vue>
 </template>
 

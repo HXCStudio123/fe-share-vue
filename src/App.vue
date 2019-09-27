@@ -2,12 +2,11 @@
   <div id="app">
     App内
     <!-- store示例； -->
-    <p>count:{{count}}</p>
-    <button @click="setCount(count+1)">+1</button>
-    <button @click="setCount(count-1)">-1</button>
+    <h2>count:{{count}} <button @click="setCount(count+1)">+1</button></h2>
+    <!-- <button @click="setCount(count-1)">-1</button> -->
     <button @click="coo = '修改后的coo'">修改测试</button>
     <button @click=" () => $refs.child1.doSomething() ">调用子组件方法</button>
-    
+
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <div @click="alert('外部')">
        外部
@@ -80,5 +79,32 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+button{
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #dcdfe6;
+  color: #606266;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 10px;
+  transition: .1s;
+  font-weight: 500;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+button:hover{
+  color: #409eff;
+  background: #ecf5ff;
+  border-color: #b3d8ff;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <demo-vue name="Child3" color="blueviolet">
+    <demo-vue name='Child3' color='blueviolet'>
         <div>父组件传递的 $attrs:{{$attrs}}</div>
         <div>coo:{{coo}}</div>
         <div>当前页面接收的 $props:{{$props}}</div>

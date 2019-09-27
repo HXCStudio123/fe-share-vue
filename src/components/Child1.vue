@@ -1,31 +1,31 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg | filterName}}</h1>
-    <button @click="changeProvide">修改 provide</button>
-
+  <div class='hello'>
+    <h1>{{ msg }}</h1>
+    <!-- <button @click='changeProvide'>修改 provide</button> -->
+    <button @click='()=>{ filterData++ }'>filterData++</button>
     <!-- store示例 -->
-    <demo-vue name="Child1" title="store示例">
-      <p>count:{{count}}</p>
-      <button @click="setCount(count+1)">+1</button>
-      <button @click="setCount(count-1)">-1</button>
+    <demo-vue name='Child1' title='store示例'>
+      <h2>count:{{count}}<button @click='setCount(count-1)'>-1</button></h2>
     </demo-vue>
 
     <!-- 多级传参示例 -->
-    <demo-vue name="Child1" title="多级传参示例">
+    <!-- 事件监听：v-on='$listeners' @other-get='otherGet' -->
+    <!-- 监听子组件：@hook:mounted='$log('成功挂载');' -->
+    <demo-vue name='Child1' title='多级传参示例'>
       <div>父组件传递的 $attrs:{{$attrs}}</div>
       <div> 当前页面接收的 $props:{{$props}}</div>
       <div>foo:{{foo}}</div>
-      <child2-vue v-bind="$attrs" v-on="$listeners" @other-get="otherGet" @hook:mounted="$log('成功挂载');"></child2-vue>
+      <child2-vue v-bind='$attrs' v-on='$listeners' @other-get='otherGet'></child2-vue>
     </demo-vue>
 
     <!-- 函数式组件 -->
-    <demo-vue name="Child1" title="函数式组件">
-      <child-function-vue v-bind="$attrs" ></child-function-vue>
+    <demo-vue name='Child1' title='函数式组件'>
+      <child-function-vue v-bind='$attrs' ></child-function-vue>
     </demo-vue>
 
     <!--  长列表示例 -->
-    <demo-vue name="Child1" title="长列表示例">
-      <span v-for="(item, idx) in list" :key="idx">
+    <demo-vue name='Child1' title='长列表示例'>
+      <span v-for='(item, idx) in list' :key='idx'>
         {{item.content}}
       </span>
     </demo-vue>
@@ -56,45 +56,49 @@ export default {
       list:[
         {
           id:1,
-          name:"占位符"
+          name:'占位符'
         }
-      ]
+      ],
+      filterData:0
     }
   },
 
-   created() {
+  created() {
       let list = Array.from({ length: 100000 }, (item, index) => ({ content: index }))
       // 开启性能模式以后  可以看到有freeze后时间缩短近30%
-      this.list = list;
-      // this.list = Object.freeze(list);
-      this.$log("初始化");
-      
-      this.$log('child1:',this.$attrs,this.$listeners); 
-      this.$listeners.get('111');
+      // this.list = list;
+      this.list = Object.freeze(list);
+      // this.$log('child1:',this.$attrs,this.$listeners); 
+      // this.$listeners.get('111');
   },
-   computed: {
+  watch: {
+    filterData(newV,oldV) {
+      this.$log(newV,oldV);
+    }
+  },
+  computed: {
     count() {
       return store.count;
     }
   },
+
   methods: {
    setCount: mutations.setCount,
    otherGet(){ },
    doSomething() {
-     this.$log("父组件调用");
+     this.$log('调用了child1中的doSomething');
    },
    changeProvide() { },
   },
   filters: {
-        filterName: (value) => {
-            window.alert(value);
-            return '本地过滤器';
-        },
+    filterName: (value) => {
+      return '本地过滤器';
+    },
   },
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+<!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
