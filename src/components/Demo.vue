@@ -13,7 +13,7 @@
 
 <style scopded>
 .hello{
-  color:orange;
+  color:black;
   border:1px solid black;
   margin: 20px;
 }
@@ -22,7 +22,7 @@
   text-align:left;
 }
 .demo{
-  border:1px solid orange;
+  border:1px solid rgb(0, 153, 255);
   margin: 20px;
 }
 </style>

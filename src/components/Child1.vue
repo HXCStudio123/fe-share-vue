@@ -83,7 +83,7 @@ export default {
 
    },
    doSomething() {
-     window.console.log("子组件mounted完成");
+     window.console.log("父组件调用");
    },
    changeProvide() {
 

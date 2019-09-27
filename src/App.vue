@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    外部1111
+    App内
     <!-- store示例； -->
     <p>count:{{count}}</p>
     <button @click="setCount(count+1)">+1</button>
     <button @click="setCount(count-1)">-1</button>
     <button @click="coo = '修改后的coo'">修改测试</button>
-
+    <button @click=" () => $refs.child1.doSomething() ">调用子组件方法</button>
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- 多级数据传递 -->
     <child1
+          ref="child1"
           msg="child1" 
           :foo="foo"
           :boo="boo"
@@ -24,6 +25,7 @@
 <script>
 import child1 from './components/Child1.vue';
 import  { store, mutations }  from './utils/miniStore';
+
 export default {
   name: 'app',
   data(){
