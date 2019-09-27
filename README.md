@@ -124,7 +124,12 @@ export default {
 （没必要，但可以有）
 
 ## 4. 状态分享
-使用Vue.observable(data)，可以写一个简易的store状态管理
+使用Vue.observable(data)，可以写一个简易的store状态管理;
+
+ * `Vue.observable()`：参数{Object} object
+ * 让一个对象可响应。Vue 内部会用它来处理 data 函数返回的对象
+ * 返回的对象可以直接用于渲染函数和计算属性内，并且会在发生改变时触发相应的更新。也可以作为最小化的跨组件状态存储器，用于简单的场景
+ * **Vue 2.x以上，不向前兼容**
 
 ```java
 // miniStore.js
@@ -304,11 +309,12 @@ Vue.config.performance = isDev;
 ## 3. 函数式组件
 函数式组件，即无状态，无法实例化，内部没有任何生命周期处理方法，非常轻量，因而渲染性能高，特别适合用来只依赖外部数据传递而变化的组件。
 ![在这里插入图片描述](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS85LzI3LzE2ZDcwOWE2MGExYWNjYjM?x-oss-process=image/format,png)
-##  4. watch和computed
-先解释一下watch和computed区别：
-* `computed`： 属性的结果会被缓存，除非依赖的响应式属性变化才会重新计算。主要当作属性来使用；
-* `watch` ：一个对象，键是需要观察的表达式，值是对应回调函数。主要用来监听某些特定数据的变化，从而进行某些具体的业务逻辑操作；可以看作是` computed` 和` methods` 的结合体；
+##  4. 善用watch
+> `watch` 虽然计算属性在大多数情况下更合适，但有时也需要一个自定义的侦听器。这就是为什么 Vue 通过 watch 选项提供了一个更通用的方法，来响应数据的变化。当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的
+* `watch一个对象`，键是需要观察的表达式，值是对应回调函数。主要用来监听某些特定数据的变化，从而进行某些具体的业务逻辑操作；可以看作是` computed` 和` methods` 的结合体；
 * ` watch`更加适用于监听某一个值的变化并做对应的操作，比如请求后台接口等，而`computed`适用于计算已有的值并返回结果
+* `watch`监听路由，监听数值变化
+* 
 # 四、开发推荐
 ## 1. 修饰符
 * `.stop` - 调用 event.stopPropagation()。
@@ -326,15 +332,14 @@ Vue.config.performance = isDev;
 在了解nextTick前，需要知道**Vue 在更新 DOM 时是异步执行的**，当你设置 vm.someData = 'new value'，该组件不会立即重新渲染。当刷新队列时，组件会在下一个事件循环“tick”中更新。多数情况我们不需要关心这个过程，但是如果你想基于更新后的 DOM 状态来做点什么，这就可能会有些棘手。
 这时就需要我们用到`Vue.nextTick`。
 
-## 3. 不要在created生命周期和watch中调用同一个方法
-## 4. 不要在使用v-for的同一元素上使用v-if
-## 5. 组件编码注意事项
+## 3. 组件编码注意事项
 * 导出一个清晰、组织有序的组件，使得代码易于阅读和理解。同时也便于标准化；
 * 使用短横线分隔的形式命名事件,因为不论什么形式vue最后都会转成'xx-xx'这种形式；
 * 能避免操作 dom 就尽量避免，实在要用的话最好使用 ref 来代替 querySelector 等选择器方法；
 * 一个 .vue 的文件行数最好控制在 200 行左右；
 * 善用 v-if 和 v-show。比如，涉及到权限的必须用 v-if 而非 v-show。例如，用户必须登录后才能查看的，请用 v-if；
 * 请尽量保证数据流的可追踪性。尽量不要使用 $parent，而是通过 props 属性接收父组件的传入；
+* 不要在使用v-for的同一元素上使用v-if
 ## 相关链接
 ![在这里插入图片描述](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAxOS85LzI3LzE2ZDcwOWE2MGQzNDhjMWE?x-oss-process=image/format,png)
 [Vue API](https://cn.vuejs.org/v2/api/)

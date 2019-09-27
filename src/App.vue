@@ -2,10 +2,10 @@
   <div id="app">
     App内
     <!-- store示例； -->
-    <h2>count:{{count}} <button @click="setCount(count+1)">+1</button></h2>
-    <!-- <button @click="setCount(count-1)">-1</button> -->
+    <h2>name:{{name}} count:{{count}} <button @click="setCount(count+1)">+1</button></h2>
+    
     <button @click="coo = '修改后的coo'">修改测试</button>
-    <button @click=" () => $refs.child1.doSomething() ">调用子组件方法</button>
+    <button @click=" () => $refs.child1.doSomething('APP.vue') ">调用子组件方法</button>
 
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <div @click="alert('外部')">
@@ -34,10 +34,10 @@ export default {
   name: 'app',
   data(){
     return {
-      foo: "hello",
-      boo: "world",
-      coo: "fight",
-      doo: "hard",
+      foo: 'hello',
+      boo: 'world',
+      coo: 'fight',
+      doo: 'hard',
     };
   },
   components: {
@@ -51,6 +51,9 @@ export default {
     count() {
       return store.count;
     },
+    name() {
+      return store.name;
+    }
   },
   methods: {
     // store示例

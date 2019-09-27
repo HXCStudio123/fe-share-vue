@@ -2,9 +2,9 @@
     <div>
         <hr/>
         <h2>{{props.title}}</h2>
-          <div class='hello' :style='{color:props.color}'>
-            <div class='title'>{{props.name}}内部</div>
-            <div class='demo' :style='{borderColor:props.color}'>     
+          <div class="hello" :style="{color:props.color}">
+            <div class="title">{{props.name}}内部</div>
+            <div class="demo" :style="{borderColor:props.color}">     
                 <slot></slot>
             </div>
           </div>
